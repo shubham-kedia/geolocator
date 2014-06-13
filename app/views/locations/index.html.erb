@@ -1,0 +1,27 @@
+<select name="country" id="country">
+  <option value="">Select Country</option>
+  <%@countries.each do |country|%>
+  <option value="<%=country.id%>"><%=country.name%></option>
+  <%end%>
+</select>
+<select name="state" id="state">
+  <option value="">Select State</option>
+</select>
+<select name="city" id="city">
+  <option value="">Select City</option>
+</select>
+<%#binding.pry%>
+<%if !(@countries.count>0)%>
+<form method="post" action="">
+  <input type="submit" value="Fetch Country">
+</form>
+<%end%>
+<div class="info">
+  <p class="place"></p>
+  <p class="type"></p>
+  <p class="code"></p>
+  <p class="currency"></p>
+  <p class="timezone"></p>
+  <p class="literacy"></p>
+  <p class="population"></p>
+</div>
