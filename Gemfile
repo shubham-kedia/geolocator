@@ -36,6 +36,8 @@ gem "geocoder"
 gem 'rails_admin'
 gem 'pry'
 gem 'seed_dump'
+gem 'pg'
+gem 'rails_12factor', group: :production
 # rake db:seed:dump
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
