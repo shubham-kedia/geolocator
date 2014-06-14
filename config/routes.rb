@@ -1,9 +1,7 @@
 Geolocator::Application.routes.draw do
   mount RailsAdmin::Engine => '/admin', as: 'rails_admin'
   root 'locations#index'
-  post '/getstates' , to: "locations#get_states"
-  post '/getcities' , to: "locations#get_cities"
-  post '/getcity' , to: "locations#get_city"
+  post '/get_location' , to: "locations#get_location"
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

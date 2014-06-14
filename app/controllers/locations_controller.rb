@@ -2,24 +2,16 @@ class LocationsController < ApplicationController
   def index
     @countries=Country.all
   end
-  def get_states
-    @country=Country.find(params[:id])
-    @states=@country.states.select("id,name")
-    respond_to do |format|
-      format.json { render :json => {:states=>@states ,"status"=>"success",:country=>@country} }
+  def get_location
+    if params[:type]=="Country"
+      @loc=Country.find(params[:id]).states.select("id,name")
+    elsif params[:type]=="State"
+      @loc=State.find(params[:id]).cities.select("id,name")
+    elsif params[:type]=="City"
+      @loc=City.find(params[:id])
     end
-  end
-  def get_cities
-    @state=State.find(params[:id])
-    @cities=@state.cities.select("id,name")
     respond_to do |format|
-      format.json { render :json => {:cities=>@cities ,"status"=>"success",:state=>@state } }
-    end
-  end
-  def get_city
-    @city=City.find(params[:id])
-    respond_to do |format|
-      format.json { render :json => {:city=>@city,"status"=>"success"} }
+      format.json { render :json => {:places=>@loc,"status"=>"success"} }
     end
   end
 end

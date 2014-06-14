@@ -7,22 +7,13 @@ $(document).ready(function(){
       $('#state').show();
       $('#state').html('');
       $('<option>').val('').text('Select State').appendTo('#state');
-      $.ajax({
-        type: "POST",
-        url: '/getstates',
-        data: {'id':$("#country").val()},
-        success: function (data) {
-          // console.log(data.states);
-          for (var i=0;i<data.states.length;i++){
-            // console.log(data.states[i].id);
-            // console.log(data.states[i].name);
-            $('#state')         
-            .append($("<option></option>")
-             .attr("value",data.states[i].id)
-             .text(data.states[i].name)); 
-          }
-        }
-      });
+      var data =JSON.parse(doAjax($("#country").val(),"Country"));
+      for (var i=0;i<data.places.length;i++){
+        $('#state')         
+        .append($("<option></option>")
+         .attr("value",data.places[i].id)
+         .text(data.places[i].name)); 
+      }
     }else{
       $('#state,#city').hide();
     }
@@ -33,21 +24,12 @@ $(document).ready(function(){
       $('#city').show();
       $('#city').html('');
       $('<option>').val('').text('Select City').appendTo('#city');
-      $.ajax({
-        type: "POST",
-        url: '/getcities',
-        data: {'id':$("#state").val()},
-        success: function (data) {
-          // console.log(data);
-          for (var i=0;i<data.cities.length;i++){
-            // console.log(data.cities[i].id);
-            // console.log(data.cities[i].name);
-            $('#city').append($("<option></option>")
-              .attr("value",data.cities[i].id)
-              .text(data.cities[i].name));
-          }
-        }
-      });
+      var data=JSON.parse(doAjax($("#state").val(),"State"));
+      for (var i=0;i<data.places.length;i++){
+        $('#city').append($("<option></option>")
+          .attr("value",data.places[i].id)
+          .text(data.places[i].name));
+      }
     }else{
       $('#city').hide();
     }
@@ -56,27 +38,28 @@ $(document).ready(function(){
   $('#city').click(function(e){
     $('.info').children().html("")
     if ($("#city").val()!=""){
-      $.ajax({
-        type: "POST",
-        url: '/getcity',
-        data: {'id':$("#city").val()},
-        success: function (data) {
-          console.log(data.city);
-          $('.place').html("Place:"+data.city.name)
-          $('.type').html("Type:City")
-          $('.code').html("Code:"+data.city.code)
-          console.log(data.city.population==null);
-          if (data.city.population==null || data.city.population=="") {
-            $('.population').html("Population:Data Not Available")
-          }else{
-            $('.population').html("Population:"+data.city.population)
-          }
-          // $('.place').html(data.city.name)
-        }
-      });
+      var data=JSON.parse(doAjax($("#city").val(),"City"));
+      console.log(data);
+      $('.place').html("Place:"+data.places.name)
+      $('.type').html("Type:City")
+      $('.code').html("Code:"+data.places.code)
+      if (data.places.population==null || data.places.population=="") {
+        $('.population').html("Population:Data Not Available")
+      }else{
+        $('.population').html("Population:"+data.places.population)
+      }
     }else{
       $('.info').children().html("")
     }
   });
-
 });
+function doAjax(id,type){
+  return $.ajax({
+    type: "POST",
+    url: '/get_location',
+    async: false,
+    data: {'id':id,'type':type},
+    success: function (data) {
+    }
+  }).responseText;
+}
