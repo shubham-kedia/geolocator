@@ -4,14 +4,20 @@ class LocationsController < ApplicationController
   end
   def get_location
     if params[:type]=="Country"
-      @loc=Country.find(params[:id]).states.select("id,name")
+      @selected=Country.find(params[:id])
+      @loc=@selected.states.select("id,name")
+      @ct=@selected.currency_type
+      @tz=@selected.time_zone
+      @selected=[:country=>@selected,:currency=>@ct,:timezone=>@tz]
     elsif params[:type]=="State"
-      @loc=State.find(params[:id]).cities.select("id,name")
+      @selected=State.find(params[:id])
+      @loc=@selected.cities.select("id,name")
     elsif params[:type]=="City"
-      @loc=City.find(params[:id])
+      @selected=City.find(params[:id])
+      @loc=nil
     end
     respond_to do |format|
-      format.json { render :json => {:places=>@loc,"status"=>"success"} }
+      format.json { render :json => {:places=>@loc,"status"=>"success",:selected=>@selected} }
     end
   end
 end

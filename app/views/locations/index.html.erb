@@ -1,27 +1,31 @@
-<select name="country" id="country">
-  <option value="">Select Country</option>
-  <%@countries.each do |country|%>
-  <option value="<%=country.id%>"><%=country.name%></option>
+<div class="container">
+  <form class="form-inline">
+    <div class="dropdown form-group">
+      <select name="country" id="country" class="form-control">
+        <option value="">Select Country</option>
+        <%@countries.each do |country|%>
+        <option value="<%=country.id%>"><%=country.name%></option>
+        <%end%>
+      </select>
+      <select name="state" id="state" class="form-control">
+      </select>
+      <select name="city" id="city" class="form-control">
+      </select>
+    </div>
+  </form>
+  <%if !(@countries.count>0)%>
+  <form method="post" action="" class="form-inline">
+    <input type="submit" value="Fetch Country">
+  </form>
   <%end%>
-</select>
-<select name="state" id="state">
-  <option value="">Select State</option>
-</select>
-<select name="city" id="city">
-  <option value="">Select City</option>
-</select>
-<%#binding.pry%>
-<%if !(@countries.count>0)%>
-<form method="post" action="">
-  <input type="submit" value="Fetch Country">
-</form>
-<%end%>
-<div class="info">
-  <p class="place"></p>
-  <p class="type"></p>
-  <p class="code"></p>
-  <p class="currency"></p>
-  <p class="timezone"></p>
-  <p class="literacy"></p>
-  <p class="population"></p>
+  <div class="info">
+    <p class="place"><b>Place:</b><span></span></p>
+    <p class="type"><b>Type:</b><span></span></p>
+    <p class="code"><b>Code:</b><span></span></p>
+    <p class="currency"><b>Currency:</b><span></span></p>
+    <p class="timezone"><b>TimeZone:</b><span></span></p>
+    <p class="literacy"><b>Literacy Rate:</b><span></span></p>
+    <p class="population"><b>Population:</b><span></span></p>
+    <p class="wiki"><b>Wiki:</b><span></span></p>
+  </div>
 </div>

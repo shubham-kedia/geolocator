@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140613182638) do
+ActiveRecord::Schema.define(version: 20140615161808) do
 
   create_table "cities", force: true do |t|
     t.string   "name"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 20140613182638) do
     t.datetime "updated_at"
     t.float    "population"
     t.string   "wiki_link"
+    t.integer  "area",        limit: 8
   end
 
   create_table "countries", force: true do |t|
@@ -35,6 +36,7 @@ ActiveRecord::Schema.define(version: 20140613182638) do
     t.string   "wiki_link"
     t.integer  "currency_type_id"
     t.integer  "time_zone_id"
+    t.integer  "area",             limit: 8
   end
 
   create_table "currency_types", force: true do |t|
@@ -55,6 +57,7 @@ ActiveRecord::Schema.define(version: 20140613182638) do
     t.float    "population"
     t.float    "literacy"
     t.string   "wiki_link"
+    t.integer  "area",        limit: 8
   end
 
   create_table "time_zones", force: true do |t|

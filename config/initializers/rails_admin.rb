@@ -31,4 +31,56 @@ RailsAdmin.config do |config|
     # history_index
     # history_show
   end
+  config.model Country do
+    create do
+      configure :population do
+        read_only true
+      end
+      configure :area do
+        read_only true
+      end
+    end
+    edit do
+      configure :population do
+        read_only true
+      end
+      configure :area do
+        read_only true
+      end
+    end
+    update do
+      configure :population do
+        read_only true
+      end
+      configure :area do
+        read_only true
+      end
+    end
+  end
+  config.model State do
+    create do
+      configure :population do
+        read_only true
+      end
+      configure :area do
+        read_only true
+      end
+    end
+    edit do
+      configure :population do
+        read_only true
+      end
+      configure :area do
+        read_only true
+      end
+    end
+    update do
+      configure :population do
+        read_only true
+      end
+      configure :area do
+        read_only true
+      end
+    end
+  end
 end
