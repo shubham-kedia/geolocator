@@ -89,8 +89,9 @@ function generateViews(data,type){
   if (data.population==null || data.population=="") {
     $('.population').children('span').html("Data Not Available")
   }else{
-    $('.population').children('span').html(data.population)
+    $('.population').children('span').html(data.population+"(in million)")
   }
+  $('.area').children('span').html(data.area+"(in 100sq Km)")
   if (data.wiki_link==null || data.wiki_link=="") {
     $('.wiki').children('span').html("Data Not Available")
   }else{

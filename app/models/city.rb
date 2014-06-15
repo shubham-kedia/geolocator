@@ -6,5 +6,9 @@ class City < ActiveRecord::Base
     self.state.save
     self.state.country.population=self.state.country.states.map { |e| e.population||=0.0}.reduce(:+)
     self.state.country.save
+    self.state.area=self.state.cities.map { |e|  e.area||=0.0}.reduce(:+)
+    self.state.save
+    self.state.country.area=self.state.country.states.map { |e| e.area||=0.0}.reduce(:+)
+    self.state.country.save
   end
 end

@@ -1,0 +1,4 @@
+To reset the db
+heroku pg:reset DATABASE --confirm db_name
+To dumb db values
+rake db:seed:dump
