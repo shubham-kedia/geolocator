@@ -67,6 +67,7 @@ function generateViews(data,type){
   var currency,timezone;
   $('.info').show()
   if (type=="Country") {
+    $('.timezone,.currency').show()
     currency=data[0].currency
     timezone=data[0].timezone
     data=data[0].country
@@ -98,6 +99,7 @@ function generateViews(data,type){
     $('.wiki').children('span').html("See on <a href="+data.wiki_link+" target=_blank>Wiki</a>")
   }
   if (type!="City") {
+    $('.literacy').show()
     if (data.literacy==null || data.literacy=="") {
       $('.literacy').children('span').html("Data Not Available")
     }else{
